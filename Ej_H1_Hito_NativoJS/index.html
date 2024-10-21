@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HITO NÚMERO 1</title>
+    <script src="index.js" defer></script>
+    <link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <form id="formulario">
+        <fieldset>
+
+            <legend>FORMULARIO:</legend>
+
+            <label for="fname">Nombre:</label>
+            <input type="text" required id="nombre" placeholder="Nombre">
+
+            <label for="fapellido">Apellidos:</label>
+            <input type="text" required id="apellido" placeholder="Apellidos">
+
+            <label for="fuser">Usuario:</label>
+            <input type="text" required id="usuario" placeholder="Usuario">
+
+            <label for="contraseña">Contraseña:</label>
+            <input type="password" id="contraseña" placeholder="Contraseña" minlength="8" required >
+
+            <label for="conf_contraseña">Confirmar contraseña:</label>
+            <input type="password" id="conf_contraseña" placeholder="Confirmar contraseña" minlength="8" required>
+
+            <label for="fcorreo">Correo electrónico:</label>
+            <input type="email" id="correo" placeholder="Correo electrónico" required>
+
+            <label for="paises">Países:</label>
+            <select id="paises" name="paises" required>
+                <option value="" disabled selected>Selecciona un país</option>
+                <option value="España">España</option>
+                <option value="Francia">Francia</option>
+                <option value="Italia">Italia</option>
+                <option value="Alemania">Alemania</option>
+                <option value="Noruega">Noruega</option>
+            </select>
+
+            <label for="comentario">Comentario:</label>
+
+            <textarea name="comentario" id="comentario" rows="10" cols="30"
+                placeholder="Comentario adicional "></textarea>
+
+            <label>
+                ¿Eres fumador?
+                <br><br>
+                <input type="radio" id="option" name="fumador" value="si"> Si
+                <input type="radio" id="option" name="fumador" value="no"> No
+                <br><br>
+            </label>
+
+
+            <input type="submit">
+
+            <input type="reset">
+
+
+        </fieldset>
+    </form>
+
+
+</body>
+
+</html>
