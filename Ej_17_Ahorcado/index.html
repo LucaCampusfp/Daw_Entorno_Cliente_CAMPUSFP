@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AHORCADO</title>
+    <link rel="stylesheet" href="index.css"> <!-- (opcional, si tienes un archivo de estilo) -->
+    <script src="index.js" defer></script> <!-- Vincula el archivo JS -->
+</head>
+<body>
+    <h1>Ahorcado</h1>
+    <p id="txtPalabra_Secreta"></p>
+    <p id="txtPalabra_Usuario"></p>
+    <p id="ImagenFallos"></p>
+    <input type="button" value="Reset Game" onclick="__Ahorcado_NameSpace__.resetGame()">
+    <div id="ContenedorBotonesLetras"></div>
+    <div id="PartidaPerdida" class="alert alert-danger" style="display: none;">
+        <strong>HAS PERDIDO</strong>
+    </div>
+    <div id="PartidaGanada" class="alert alert-success" style="display: none;">
+        <strong>HAS GANADO</strong>
+    </div>
+</body>
+</html>
