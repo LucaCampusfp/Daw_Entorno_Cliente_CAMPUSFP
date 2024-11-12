@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.controls {
+    margin: 20px 0;
+}
+
+.puzzle-container {
+    display: inline-block;
+    position: relative;
+    margin: 20px auto;
+    
+}
+
+.preview-container {
+    max-width: 400px;
+    margin: 20px auto;
+ 
+    padding: 5px;
+}
+
+.puzzle-piece {
+    position: absolute;
+ 
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.puzzle-piece:hover {
+    transform: scale(1.02);
+    z-index: 100;
+}
+
+.puzzle-piece.selected {
+    border: 2px solid #ff0000;
+    z-index: 101;
+}
+
+.original-image {
+    max-width: 400px;
+    display: none;
+    margin: 20px auto;
+}
+
+#previewImage {
+    max-width: 100%;
+    height: auto;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+select {
+    padding: 5px;
+    margin: 5px;
+    font-size: 14px;
+}
+
+.timer {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #333;
+}
+
+#imageInput {
+    display: none;
+}
+
+.upload-btn {
+    background-color: #2196F3;
+}
+
+.upload-btn:hover {
+    background-color: #1976D2;
+}
+
+.solve-btn {
+    background-color: #FF9800;
+}
+
+.solve-btn:hover {
+    background-color: #F57C00;
+}
