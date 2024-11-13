@@ -1,37 +1,37 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HITO_2</title>
-    <script src="index.js" defer></script> 
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-    <h1>Juego de Puzzle</h1>
-    
-    <div class="controls">
-        <button class="upload-btn" onclick="document.getElementById('imageInput').click()">Seleccionar Imagen</button>
-        <input type="file" id="imageInput" accept="image/*">
-        <select id="piecesSelect">
-            <option value="9">3x3 (9 piezas)</option>
-            <option value="16">4x4 (16 piezas)</option>
-            <option value="25">5x5 (25 piezas)</option>
-            <option value="64">8x8 (64 piezas)</option>
-        </select>
-        <button id="startButton">Comenzar Juego</button>
-        <button id="showOriginal">Mostrar Original</button>
-        <button id="solveButton" class="solve-btn">Resolver Puzzle</button>
-    </div>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HITO_2</title>
+        <script src="index.js" defer></script> 
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <h1>Juego de Puzzle</h1>
+        
+        <div class="controls">
+            <button class="upload-btn" onclick="document.getElementById('imageInput').click()">Seleccionar Imagen</button>
+            <input type="file" id="imageInput" accept="image/*">
+            <select id="piecesSelect">
+                <option value="9">3x3 (9 piezas)</option>
+                <option value="16">4x4 (16 piezas)</option>
+                <option value="25">5x5 (25 piezas)</option>
+                <option value="64">8x8 (64 piezas)</option>
+            </select>
+            <button id="startButton">Comenzar Juego</button>
+            <button id="showOriginal">Mostrar Original</button>
+            <button id="solveButton" class="solve-btn">Resolver Puzzle</button>
+        </div>
 
-    <div class="timer">Tiempo: <span id="time">00:00</span></div>
-    
-    <div id="previewContainer" class="preview-container">
-        <img id="previewImage">
-    </div>
+        <div class="timer">Tiempo: <span id="time">00:00</span></div>
+        
+        <div id="previewContainer" class="preview-container">
+            <img id="previewImage">
+        </div>
 
-    <div id="puzzleContainer" class="puzzle-container"></div>
-    <img id="originalImage" class="original-image">
-   
-</body>
-</html>
+        <div id="puzzleContainer" class="puzzle-container"></div>
+        <img id="originalImage" class="original-image">
+    
+    </body>
+    </html>
