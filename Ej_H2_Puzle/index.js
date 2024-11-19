@@ -1,249 +1,257 @@
-class PuzzleGame {
+class JuegoPuzzle {
     constructor() {
-        this.imageInput = document.getElementById('imageInput');
-        this.piecesSelect = document.getElementById('piecesSelect');
-        this.startButton = document.getElementById('startButton');
-        this.showOriginalButton = document.getElementById('showOriginal');
-        this.solveButton = document.getElementById('solveButton');
-        this.puzzleContainer = document.getElementById('puzzleContainer');
-        this.originalImage = document.getElementById('originalImage');
-        this.previewImage = document.getElementById('previewImage');
-        this.timeSpan = document.getElementById('time');
+        this.entradaImagen = document.getElementById('imageInput');
+        this.seleccionPiezas = document.getElementById('piecesSelect');
+        this.botonIniciar = document.getElementById('startButton');
+        this.botonMostrarOriginal = document.getElementById('showOriginal');
+        this.restartButton = document.getElementById('restartButton'); 
+        this.botonResolver = document.getElementById('solveButton');
+        this.botonReiniciar = document.getElementById('restartButton');  // Nuevo botón
+        this.contenedorPuzzle = document.getElementById('puzzleContainer');
+        this.imagenOriginal = document.getElementById('originalImage');
+        this.imagenPrevia = document.getElementById('previewImage');
+        this.spanTiempo = document.getElementById('time');
         
-        this.pieces = [];
-        this.selectedPiece = null;
-        this.startTime = null;
-        this.timerInterval = null;
-        this.gameStarted = false;
+        this.piezas = [];
+        this.piezaSeleccionada = null;
+        this.tiempoInicio = null;
+        this.intervaloTemporizador = null;
+        this.juegoIniciado = false;
         
-        this.initializeEventListeners();
-        this.startButton.disabled = true;
-        this.solveButton.disabled = true;
+        this.iniciarListenersEventos();
+        this.botonIniciar.disabled = true;
+        this.botonResolver.disabled = true;
     }
 
-    initializeEventListeners() {
-        this.startButton.addEventListener('click', () => this.startGame());
-        this.showOriginalButton.addEventListener('click', () => this.toggleOriginalImage());
-        this.imageInput.addEventListener('change', (e) => this.handleImageUpload(e));
-        this.solveButton.addEventListener('click', () => this.solvePuzzle());
+    iniciarListenersEventos() {
+        this.botonIniciar.addEventListener('click', () => this.iniciarJuego());
+        this.botonMostrarOriginal.addEventListener('click', () => this.toggleImagenOriginal());
+        this.entradaImagen.addEventListener('change', (e) => this.procesarSubidaImagen(e));
+        this.botonResolver.addEventListener('click', () => this.resolverPuzzle());
+        this.botonReiniciar.addEventListener('click', () => this.reiniciarJuego());
+        this.restartButton.addEventListener('click', () => this.restartGame()); // Manejador de evento para reiniciar el juego
     }
 
-    handleImageUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                this.originalImage.src = e.target.result;
-                this.previewImage.src = e.target.result;
-                this.originalImage.style.display = 'none';
-                this.startButton.disabled = false;
+    procesarSubidaImagen(evento) {
+        const archivo = evento.target.files[0];
+        if (archivo) {
+            const lector = new FileReader();
+            lector.onload = (e) => {
+                this.imagenOriginal.src = e.target.result;
+                this.imagenPrevia.src = e.target.result;
+                this.imagenOriginal.style.display = 'none';
+                this.botonIniciar.disabled = false;
             };
-            reader.readAsDataURL(file);
+            lector.readAsDataURL(archivo);
         }
     }
 
-    async solvePuzzle() {
-        this.solveButton.disabled = true;
-        const gridSize = Math.sqrt(this.pieces.length);
+    async resolverPuzzle() {
+        this.botonResolver.disabled = true;
+        const tamanoRejilla = Math.sqrt(this.piezas.length);
         
         // Crear array con posiciones correctas
-        const correctPositions = [];
-        for (let y = 0; y < gridSize; y++) {
-            for (let x = 0; x < gridSize; x++) {
-                correctPositions.push({ x, y });
+        const posicionesCorrectas = [];
+        for (let y = 0; y < tamanoRejilla; y++) {
+            for (let x = 0; x < tamanoRejilla; x++) {
+                posicionesCorrectas.push({ x, y });
             }
         }
 
         // Mover cada pieza a su posición correcta
-        for (let i = 0; i < this.pieces.length; i++) {
-            const correctPiece = this.pieces.find(
-                piece => piece.dataset.correctX == correctPositions[i].x && 
-                piece.dataset.correctY == correctPositions[i].y
+        for (let i = 0; i < this.piezas.length; i++) {
+            const piezaCorrecta = this.piezas.find(
+                pieza => pieza.dataset.correctX == posicionesCorrectas[i].x && 
+                pieza.dataset.correctY == posicionesCorrectas[i].y
             );
             
-            if (correctPiece !== this.pieces[i]) {
-                const currentIndex = this.pieces.indexOf(correctPiece);
-                await this.animateSwap(i, currentIndex);
-                [this.pieces[i], this.pieces[currentIndex]] = [this.pieces[currentIndex], this.pieces[i]];
-                this.updatePiecesPosition();
+            if (piezaCorrecta !== this.piezas[i]) {
+                const indiceActual = this.piezas.indexOf(piezaCorrecta);
+                await this.animarIntercambio(i, indiceActual);
+                [this.piezas[i], this.piezas[indiceActual]] = [this.piezas[indiceActual], this.piezas[i]];
+                this.actualizarPosicionPiezas();
             }
             
-            await new Promise(resolve => setTimeout(resolve, 0.1));
+            await new Promise(resolve => setTimeout(resolve, 0.0001));
         }
 
-        if (this.checkWin()) {
-            this.handleWin();
+        if (this.comprobarVictoria()) {
+            this.manejarVictoria();
         }
     }
 
-    animateSwap(index1, index2) {
+    animarIntercambio(indice1, indice2) {
         return new Promise(resolve => {
-            const piece1 = this.pieces[index1];
-            const piece2 = this.pieces[index2];
-            const rect1 = piece1.getBoundingClientRect();
-            const rect2 = piece2.getBoundingClientRect();
+            const pieza1 = this.piezas[indice1];
+            const pieza2 = this.piezas[indice2];
+            const rect1 = pieza1.getBoundingClientRect();
+            const rect2 = pieza2.getBoundingClientRect();
             
             const dx = rect2.left - rect1.left;
             const dy = rect2.top - rect1.top;
             
-            piece1.style.transform = `translate(${dx}px, ${dy}px)`;
-            piece2.style.transform = `translate(${-dx}px, ${-dy}px)`;
+            pieza1.style.transform = `translate(${dx}px, ${dy}px)`;
+            pieza2.style.transform = `translate(${-dx}px, ${-dy}px)`;
             
             setTimeout(() => {
-                piece1.style.transform = '';
-                piece2.style.transform = '';
+                pieza1.style.transform = '';
+                pieza2.style.transform = '';
                 resolve();
-            }, 300);
+            }, 0.001);
         });
     }
 
-    startGame() {
-        if (!this.originalImage.src) {
+    iniciarJuego() {
+        if (!this.imagenOriginal.src) {
             alert('Por favor, selecciona una imagen primero');
             return;
         }
 
-        this.resetGame();
-        const gridSize = Math.sqrt(parseInt(this.piecesSelect.value));
-        this.createPuzzlePieces(gridSize);
-        this.startTimer();
-        this.gameStarted = true;
-        this.solveButton.disabled = false;
+        this.reiniciarJuego();
+        const tamanoRejilla = Math.sqrt(parseInt(this.seleccionPiezas.value));
+        this.crearPiezasPuzzle(tamanoRejilla);
+        this.iniciarTemporizador();
+        this.juegoIniciado = true;
+        this.botonResolver.disabled = false;
         document.getElementById('previewContainer').style.display = 'none';
     }
 
-    resetGame() {
-        this.puzzleContainer.innerHTML = '';
-        this.pieces = [];
-        this.selectedPiece = null;
-        clearInterval(this.timerInterval);
-        this.timeSpan.textContent = '00:00';
-        this.gameStarted = false;
+    reiniciarJuego() {
+        this.contenedorPuzzle.innerHTML = '';
+        this.piezas = [];
+        this.piezaSeleccionada = null;
+        clearInterval(this.intervaloTemporizador);
+        this.spanTiempo.textContent = '00:00';
+        this.juegoIniciado = false;
+    }
+    restartGame() {
+        // Reiniciar la página y el juego
+        location.reload();  // Recarga la página para reiniciar todo
     }
 
-    createPuzzlePieces(gridSize) {
-        const pieceWidth = this.originalImage.naturalWidth / gridSize;
-        const pieceHeight = this.originalImage.naturalHeight / gridSize;
-        const scaleFactor = 400 / this.originalImage.naturalWidth;
+    crearPiezasPuzzle(tamanoRejilla) {
+        const anchoPieza = this.imagenOriginal.naturalWidth / tamanoRejilla;
+        const altoPieza = this.imagenOriginal.naturalHeight / tamanoRejilla;
+        const factorEscala = 1000 / this.imagenOriginal.naturalWidth;
         
-        this.puzzleContainer.style.width = `${this.originalImage.naturalWidth * scaleFactor}px`;
-        this.puzzleContainer.style.height = `${this.originalImage.naturalHeight * scaleFactor}px`;
+        this.contenedorPuzzle.style.width = `${this.imagenOriginal.naturalWidth * factorEscala}px`;
+        this.contenedorPuzzle.style.height = `${this.imagenOriginal.naturalHeight * factorEscala}px`;
 
-        for (let y = 0; y < gridSize; y++) {
-            for (let x = 0; x < gridSize; x++) {
-                const piece = document.createElement('div');
-                piece.className = 'puzzle-piece';
-                piece.style.width = `${pieceWidth * scaleFactor}px`;
-                piece.style.height = `${pieceHeight * scaleFactor}px`;
-                piece.style.backgroundImage = `url(${this.originalImage.src})`;
-                piece.style.backgroundSize = `${this.originalImage.naturalWidth * scaleFactor}px ${this.originalImage.naturalHeight * scaleFactor}px`;
-                piece.style.backgroundPosition = `-${x * pieceWidth * scaleFactor}px -${y * pieceHeight * scaleFactor}px`;
+        for (let y = 0; y < tamanoRejilla; y++) {
+            for (let x = 0; x < tamanoRejilla; x++) {
+                const pieza = document.createElement('div');
+                pieza.className = 'puzzle-piece';
+                pieza.style.width = `${anchoPieza * factorEscala}px`;
+                pieza.style.height = `${altoPieza * factorEscala}px`;
+                pieza.style.backgroundImage = `url(${this.imagenOriginal.src})`;
+                pieza.style.backgroundSize = `${this.imagenOriginal.naturalWidth * factorEscala}px ${this.imagenOriginal.naturalHeight * factorEscala}px`;
+                pieza.style.backgroundPosition = `-${x * anchoPieza * factorEscala}px -${y * altoPieza * factorEscala}px`;
                 
-                piece.dataset.correctX = x;
-                piece.dataset.correctY = y;
+                pieza.dataset.correctX = x;
+                pieza.dataset.correctY = y;
                 
-                this.pieces.push(piece);
+                this.piezas.push(pieza);
             }
         }
 
-        this.shufflePieces();
-        this.updatePiecesPosition();
-        this.addPieceClickListeners();
+        this.barajarPiezas();
+        this.actualizarPosicionPiezas();
+        this.agregarListenersClickPiezas();
     }
 
-    shufflePieces() {
-        for (let i = this.pieces.length - 1; i > 0; i--) {
+    barajarPiezas() {
+        for (let i = this.piezas.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [this.pieces[i], this.pieces[j]] = [this.pieces[j], this.pieces[i]];
+            [this.piezas[i], this.piezas[j]] = [this.piezas[j], this.piezas[i]];
         }
     }
 
-    updatePiecesPosition() {
-        const gridSize = Math.sqrt(this.pieces.length);
-        const pieceWidth = 100 / gridSize;
-        const pieceHeight = 100 / gridSize;
+    actualizarPosicionPiezas() {
+        const tamanoRejilla = Math.sqrt(this.piezas.length);
+        const anchoPieza = 100 / tamanoRejilla;
+        const altoPieza = 100 / tamanoRejilla;
 
-        this.pieces.forEach((piece, index) => {
-            const x = (index % gridSize) * pieceWidth;
-            const y = Math.floor(index / gridSize) * pieceHeight;
-            piece.style.left = `${x}%`;
-            piece.style.top = `${y}%`;
-            if (!piece.parentElement) {
-                this.puzzleContainer.appendChild(piece);
+        this.piezas.forEach((pieza, indice) => {
+            const x = (indice % tamanoRejilla) * anchoPieza;
+            const y = Math.floor(indice / tamanoRejilla) * altoPieza;
+            pieza.style.left = `${x}%`;
+            pieza.style.top = `${y}%`;
+            if (!pieza.parentElement) {
+                this.contenedorPuzzle.appendChild(pieza);
             }
         });
     }
 
-    addPieceClickListeners() {
-        this.pieces.forEach(piece => {
-            piece.addEventListener('click', () => this.handlePieceClick(piece));
+    agregarListenersClickPiezas() {
+        this.piezas.forEach(pieza => {
+            pieza.addEventListener('click', () => this.manejarClickPieza(pieza));
         });
     }
 
-    async handlePieceClick(piece) {
-        if (!this.gameStarted) return;
+    async manejarClickPieza(pieza) {
+        if (!this.juegoIniciado) return;
         
-        if (!this.selectedPiece) {
-            this.selectedPiece = piece;
-            piece.classList.add('selected');
+        if (!this.piezaSeleccionada) {
+            this.piezaSeleccionada = pieza;
+            pieza.classList.add('selected');
         } else {
-            if (this.selectedPiece !== piece) {
-                const index1 = this.pieces.indexOf(this.selectedPiece);
-                const index2 = this.pieces.indexOf(piece);
+            if (this.piezaSeleccionada !== pieza) {
+                const indice1 = this.piezas.indexOf(this.piezaSeleccionada);
+                const indice2 = this.piezas.indexOf(pieza);
                 
-                await this.animateSwap(index1, index2);
-                [this.pieces[index1], this.pieces[index2]] = [this.pieces[index2], this.pieces[index1]];
-                this.updatePiecesPosition();
+                await this.animarIntercambio(indice1, indice2);
+                [this.piezas[indice1], this.piezas[indice2]] = [this.piezas[indice2], this.piezas[indice1]];
+                this.actualizarPosicionPiezas();
                 
-                if (this.checkWin()) {
-                    this.handleWin();
+                if (this.comprobarVictoria()) {
+                    this.manejarVictoria();
                 }
             }
-            this.selectedPiece.classList.remove('selected');
-            this.selectedPiece = null;
+            this.piezaSeleccionada.classList.remove('selected');
+            this.piezaSeleccionada = null;
         }
     }
 
-    checkWin() {
-        const gridSize = Math.sqrt(this.pieces.length);
-        return this.pieces.every((piece, index) => {
-            const currentX = index % gridSize;
-            const currentY = Math.floor(index / gridSize);
-            return piece.dataset.correctX == currentX && piece.dataset.correctY == currentY;
+    comprobarVictoria() {
+        const tamanoRejilla = Math.sqrt(this.piezas.length);
+        return this.piezas.every((pieza, indice) => {
+            const currentX = indice % tamanoRejilla;
+            const currentY = Math.floor(indice / tamanoRejilla);
+            return pieza.dataset.correctX == currentX && pieza.dataset.correctY == currentY;
         });
     }
 
-    handleWin() {
-        clearInterval(this.timerInterval);
-        this.gameStarted = false;
-        this.solveButton.disabled = true;
+    manejarVictoria() {
+        clearInterval(this.intervaloTemporizador);
+        this.juegoIniciado = false;
+        this.botonResolver.disabled = true;
         setTimeout(() => {
-            //alert(`¡Felicitaciones! Has completado el puzzle en ${this.timeSpan.textContent}`);
+            //alert(`¡Felicitaciones! Has completado el puzzle en ${this.spanTiempo.textContent}`);
         }, 500);
     }
 
-    startTimer() {
-        this.startTime = Date.now();
-        clearInterval(this.timerInterval);
+    iniciarTemporizador() {
+        this.tiempoInicio = Date.now();
+        clearInterval(this.intervaloTemporizador);
         
-        this.timerInterval = setInterval(() => {
-            const elapsed = Math.floor((Date.now() - this.startTime) / 1000);
-            const minutes = Math.floor(elapsed / 60);
-            const seconds = elapsed % 60;
-            this.timeSpan.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        this.intervaloTemporizador = setInterval(() => {
+            const tiempoTranscurrido = Math.floor((Date.now() - this.tiempoInicio) / 1000);
+            const minutos = Math.floor(tiempoTranscurrido / 60);
+            const segundos = tiempoTranscurrido % 60;
+            this.spanTiempo.textContent = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
         }, 1000);
     }
 
-    toggleOriginalImage() {
-        if (this.originalImage.style.display === 'none') {
-            this.originalImage.style.display = 'block';
-            this.showOriginalButton.textContent = 'Ocultar Original';
+    toggleImagenOriginal() {
+        if (this.imagenOriginal.style.display === 'none') {
+            this.imagenOriginal.style.display = 'block';
+            this.botonMostrarOriginal.textContent = 'Ocultar Original';
         } else {
-            this.originalImage.style.display = 'none';
-            this.showOriginalButton.textContent = 'Mostrar Original';
+            this.imagenOriginal.style.display = 'none';
+            this.botonMostrarOriginal.textContent = 'Mostrar Original';
         }
     }
 }
 
 // Iniciar el juego
-new PuzzleGame();
+new JuegoPuzzle();

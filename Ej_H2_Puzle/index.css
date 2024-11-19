@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    max-width: 800px;
+    max-width: 2000px;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
@@ -18,7 +18,7 @@ body {
 }
 
 .preview-container {
-    max-width: 400px;
+    max-width: 1400px;
     margin: 20px auto;
  
     padding: 5px;
@@ -42,7 +42,7 @@ body {
 }
 
 .original-image {
-    max-width: 400px;
+    max-width: 1400px;
     display: none;
     margin: 20px auto;
 }
