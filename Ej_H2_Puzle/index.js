@@ -226,7 +226,7 @@ class JuegoPuzzle {
         this.juegoIniciado = false;
         this.botonResolver.disabled = true;
         setTimeout(() => {
-            //alert(`¡Felicitaciones! Has completado el puzzle en ${this.spanTiempo.textContent}`);
+            alert(`¡Felicitaciones! Has completado el puzzle en ${this.spanTiempo.textContent}`);
         }, 500);
     }
 
