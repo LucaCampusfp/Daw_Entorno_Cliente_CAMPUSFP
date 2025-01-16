@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Información de Discos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .error {
+            border-color: red !important;
+        }
+        .error-label {
+            color: red !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Formulario de Información de Discos</h2>
+        <form id="formDiscos">
+            <div class="mb-3">
+                <label for="nombreDisco" class="form-label">Nombre del Disco</label>
+                <input type="text" class="form-control" id="nombreDisco" placeholder="Ingresa el nombre del disco" required>
+            </div>
+            <div class="mb-3">
+                <label for="grupoMusica" class="form-label">Grupo de Música o Cantante</label>
+                <input type="text" class="form-control" id="grupoMusica" placeholder="Ingresa el grupo o cantante" required>
+            </div>
+            <div class="mb-3">
+                <label for="anioPublicacion" class="form-label">Año de Publicación</label>
+                <input type="number" class="form-control" id="anioPublicacion" placeholder="Ingresa el año de publicación" min="1900" max="2099" required>
+            </div>
+            <div class="mb-3">
+                <label for="tipoMusica" class="form-label">Tipo de Música</label>
+                <select class="form-select" id="tipoMusica" required>
+                    <option value="">Seleccione el tipo de música</option>
+                    <option value="rock">Rock</option>
+                    <option value="pop">Pop</option>
+                    <option value="punk">Punk</option>
+                    <option value="indie">Indie</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="localizacion" class="form-label">Localización (Estantería)</label>
+                <input type="text" class="form-control" id="localizacion" placeholder="Ingresa la localización" required>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="prestado">
+                <label class="form-check-label" for="prestado">Prestado</label>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="button" id="borrarBtn" class="btn btn-secondary">Borrar</button>
+                <button type="submit" id="enviarBtn" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+        <div id="resultado" class="mt-4 border p-3" style="display: none;"></div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const form = document.getElementById('formDiscos');
+            const nombreDisco = document.getElementById('nombreDisco');
+            const grupoMusica = document.getElementById('grupoMusica');
+            const anioPublicacion = document.getElementById('anioPublicacion');
+            const localizacion = document.getElementById('localizacion');
+            const resultado = document.getElementById('resultado');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Evita el envío por defecto del formulario
+                let isValid = true;
+
+                // Validar nombre del disco y grupo de música
+                function validarCampo20(campo, etiqueta) {
+                    if (campo.value.length === 0 || campo.value.length > 20) {
+                        campo.classList.add('error');
+                        etiqueta.classList.add('error-label');
+                        isValid = false;
+                    } else {
+                        campo.classList.remove('error');
+                        etiqueta.classList.remove('error-label');
+                    }
+                }
+
+                const nombreDiscoLabel = document.querySelector('label[for="nombreDisco"]');
+                const grupoMusicaLabel = document.querySelector('label[for="grupoMusica"]');
+                validarCampo20(nombreDisco, nombreDiscoLabel);
+                validarCampo20(grupoMusica, grupoMusicaLabel);
+
+                // Validar año de publicación
+                const anioLabel = document.querySelector('label[for="anioPublicacion"]');
+                if (!/^[0-9]{4}$/.test(anioPublicacion.value)) {
+                    anioPublicacion.classList.add('error');
+                    anioLabel.classList.add('error-label');
+                    isValid = false;
+                } else {
+                    anioPublicacion.classList.remove('error');
+                    anioLabel.classList.remove('error-label');
+                }
+
+                // Validar localización (vacío o numérico)
+                const localizacionLabel = document.querySelector('label[for="localizacion"]');
+                if (localizacion.value !== '' && !/^[0-9]+$/.test(localizacion.value)) {
+                    localizacion.classList.add('error');
+                    localizacionLabel.classList.add('error-label');
+                    isValid = false;
+                } else {
+                    localizacion.classList.remove('error');
+                    localizacionLabel.classList.remove('error-label');
+                }
+
+                if (isValid) {
+                    // Mostrar datos en el div resultado
+                    const prestado = document.getElementById('prestado').checked ? 'Sí' : 'No';
+                    resultado.innerHTML = `
+                        <h4>Información del Disco</h4>
+                        <p><strong>Nombre del Disco:</strong> ${nombreDisco.value}</p>
+                        <p><strong>Grupo o Cantante:</strong> ${grupoMusica.value}</p>
+                        <p><strong>Año de Publicación:</strong> ${anioPublicacion.value}</p>
+                        <p><strong>Tipo de Música:</strong> ${document.getElementById('tipoMusica').value}</p>
+                        <p><strong>Localización:</strong> ${localizacion.value}</p>
+                        <p><strong>Prestado:</strong> ${prestado}</p>
+                    `;
+                    resultado.style.display = 'block';
+                }
+            });
+
+            document.getElementById('borrarBtn').addEventListener('click', () => {
+                form.reset();
+                document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+                document.querySelectorAll('.error-label').forEach(el => el.classList.remove('error-label'));
+                resultado.style.display = 'none';
+                resultado.innerHTML = '';
+            });
+        };
+    </script>
+</body>
+</html>

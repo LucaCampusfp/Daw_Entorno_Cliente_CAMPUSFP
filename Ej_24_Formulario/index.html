@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Información de Discos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Formulario de Información de Discos</h2>
+        <form id="formDiscos">
+            <div class="mb-3">
+                <label for="nombreDisco" class="form-label">Nombre del Disco</label>
+                <input type="text" class="form-control" id="nombreDisco" placeholder="Ingresa el nombre del disco" required>
+            </div>
+            <div class="mb-3">
+                <label for="grupoMusica" class="form-label">Grupo de Música o Cantante</label>
+                <input type="text" class="form-control" id="grupoMusica" placeholder="Ingresa el grupo o cantante" required>
+            </div>
+            <div class="mb-3">
+                <label for="anioPublicacion" class="form-label">Año de Publicación</label>
+                <input type="number" class="form-control" id="anioPublicacion" placeholder="Ingresa el año de publicación" min="1900" max="2099" required>
+            </div>
+            <div class="mb-3">
+                <label for="tipoMusica" class="form-label">Tipo de Música</label>
+                <select class="form-select" id="tipoMusica" required>
+                    <option value="">Seleccione el tipo de música</option>
+                    <option value="rock">Rock</option>
+                    <option value="pop">Pop</option>
+                    <option value="punk">Punk</option>
+                    <option value="indie">Indie</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="localizacion" class="form-label">Localización (Estantería)</label>
+                <input type="text" class="form-control" id="localizacion" placeholder="Ingresa la localización" required>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="prestado">
+                <label class="form-check-label" for="prestado">Prestado</label>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="button" id="borrarBtn" class="btn btn-secondary">Borrar</button>
+                <button type="button" id="enviarBtn" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+        <div id="resultado" class="mt-4 border p-3" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Referencias a los elementos del DOM
+        const form = document.getElementById('formDiscos');
+        const resultadoDiv = document.getElementById('resultado');
+        const enviarBtn = document.getElementById('enviarBtn');
+        const borrarBtn = document.getElementById('borrarBtn');
+
+        // Evento para el botón Enviar
+        enviarBtn.addEventListener('click', () => {
+            // Recolectar datos del formulario
+            const nombreDisco = document.getElementById('nombreDisco').value;
+            const grupoMusica = document.getElementById('grupoMusica').value;
+            const anioPublicacion = document.getElementById('anioPublicacion').value;
+            const tipoMusica = document.getElementById('tipoMusica').value;
+            const localizacion = document.getElementById('localizacion').value;
+            const prestado = document.getElementById('prestado').checked;
+
+            // Validar campos obligatorios
+            if (!nombreDisco || !grupoMusica || !anioPublicacion || !tipoMusica || !localizacion) {
+                alert('Por favor, completa todos los campos obligatorios.');
+                return;
+            }
+
+            // Mostrar los datos en el div resultado
+            resultadoDiv.style.display = 'block';
+            resultadoDiv.innerHTML = `
+                <h4>Información del Disco</h4>
+                <p><strong>Nombre del Disco:</strong> ${nombreDisco}</p>
+                <p><strong>Grupo o Cantante:</strong> ${grupoMusica}</p>
+                <p><strong>Año de Publicación:</strong> ${anioPublicacion}</p>
+                <p><strong>Tipo de Música:</strong> ${tipoMusica}</p>
+                <p><strong>Localización:</strong> ${localizacion}</p>
+                <p><strong>Prestado:</strong> ${prestado ? 'Sí' : 'No'}</p>
+            `;
+        });
+
+        // Evento para el botón Borrar
+        borrarBtn.addEventListener('click', () => {
+            // Reiniciar el formulario y ocultar el div resultado
+            form.reset();
+            resultadoDiv.style.display = 'none';
+            resultadoDiv.innerHTML = '';
+        });
+    </script>
+</body>
+</html>
