@@ -10,7 +10,9 @@ document.getElementById('contactForm').addEventListener('submit', function (even
     const pass = document.getElementById('pass').value;
     const confirmPass = document.getElementById('confirmPass').value;
     const pais = document.getElementById('pais').value;
-    const fumador = document.getElementById('fumador').checked;
+    
+    // Obtener el estado del radio button fumador
+    const fumador = document.querySelector('input[name="fumador"]:checked');
 
     // Limpiar posibles mensajes de error previos
     clearErrors();
@@ -38,18 +40,16 @@ document.getElementById('contactForm').addEventListener('submit', function (even
         showError('Las contraseñas no coinciden.');
         isValid = false;
     }
-    if (pass !== confirmPass) {
-        showError('Las contraseñas no coinciden.');
-        isValid = false;
-    }
 
     // Validar que se haya seleccionado un país
     if (!pais) {
         showError('Debe seleccionar un país.');
         isValid = false;
     }
+
+    // Validar que se haya seleccionado una opción de fumador (Sí o No)
     if (!fumador) {
-        showError('¿Fuma?');
+        showError('Debe indicar si es fumador.');
         isValid = false;
     }
 
