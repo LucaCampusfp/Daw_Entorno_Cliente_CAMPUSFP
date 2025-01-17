@@ -1,0 +1,6 @@
+//   Gracias por compartir el JSON. El problema radica en que las URLs que estás utilizando son enlaces estándar de 
+//   YouTube para ver los vídeos en el navegador, lo cual no es compatible con los iframe 
+//   (por las restricciones de la política de seguridad de YouTube y las cabeceras X-Frame-Options).
+
+// Para que puedas incrustar correctamente los vídeos de YouTube en un iframe, debes usar las URLs de inserción (embed) de YouTube, 
+// las cuales permiten incrustar los vídeos en otras páginas web sin restricciones.

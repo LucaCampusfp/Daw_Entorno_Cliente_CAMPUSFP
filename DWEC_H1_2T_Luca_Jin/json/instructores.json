@@ -1,0 +1,50 @@
+{
+    "instructores": [
+      {
+        "nombre_y_cargo": "Mauricio Gómez (Propietario del gimnasio / Entrenador jefe de artes marciales)",
+        "detalles": [
+          "Entrenador en todas las artes marciales 4o Dan Cinturón Negro",
+          "Judo 3o Dan Cinturón Negro",
+          "Jiujitsu 1o Dan Cinturón Negro",
+          "Karate",
+          "Entrenador acreditado de Muay Thai"
+        ]
+      },
+      {
+        "nombre_y_cargo": "Sarah Nova (Ayudante entrenador de artes marciales)",
+        "detalles": [
+          "5o Dan de Kárate"
+        ]
+      },
+      {
+        "nombre_y_cargo": "Guy Victory (Entrenador asistente de artes marciales)",
+        "detalles": [
+          "2o Dan Cinturón Negro Jiujitsu",
+          "1o Dan Cinturón Negro Judo"
+        ]
+      },
+      {
+        "nombre_y_cargo": "Morris Davis (Asistente entrenador de artes marciales)",
+        "detalles": [
+          "Entrenador acreditado de Muay Thai",
+          "3er Dan Cinturón Negro Karate"
+        ]
+      },
+      {
+        "nombre_y_cargo": "Traci Santiago (Preparadora física)",
+        "detalles": [
+          "Licenciatura en Ciencias del Deporte",
+          "Diplomado en salud y nutrición",
+          "Especializada en diseñar programas de fuerza y acondicionamiento para atletas de combate"
+        ]
+      },
+      {
+        "nombre_y_cargo": "Harpreet Kaur (Preparador físico)",
+        "detalles": [
+          "Licenciatura en Fisioterapia",
+          "Máster en Ciencias del Deporte"
+        ]
+      }
+    ]
+  }
+  

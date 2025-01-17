@@ -1,0 +1,24 @@
+{
+    "videos": [
+      {
+        "titulo": "Técnicas de Karate",
+        "url": "https://www.youtube.com/embed/aR_1dlSUR2c"
+      },
+      {
+        "titulo": "Entrenamiento de Judo",
+        "url": "https://www.youtube.com/embed/EtI9gQh7r1I"
+      },
+      {
+        "titulo": "Muay Thai para principiantes",
+        "url": "https://www.youtube.com/embed/55d7LH69IIA"
+      },
+      {
+        "titulo": "Entrenamiento de Jiujitsu",
+        "url": "https://www.youtube.com/embed/FXKSwK1YdfI"
+      },
+      {
+        "titulo": "Karate avanzado",
+        "url": "https://www.youtube.com/embed/hxurkwieZB0"
+      }
+    ]
+  }
