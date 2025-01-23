@@ -1,7 +1,7 @@
 // Espera a que la página esté cargada antes de ejecutar el código
 window.onload = function() {
     // Llamar al archivo JSON usando fetch
-    fetch('/json/instructores.json')
+    fetch('json/instructores.json')
         .then(response => {
             // Verifica si la respuesta fue exitosa
             if (!response.ok) {

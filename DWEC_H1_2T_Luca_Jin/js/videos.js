@@ -3,10 +3,11 @@ window.onload = function () {
     const cargarVideoBtn = document.getElementById('cargar-video');
     
     // Intentar cargar los vídeos desde el archivo JSON
-    fetch('/json/videos.json')
+    fetch('json/videos.json')
         .then(response => response.json())
         .then(data => {
             // Al hacer clic en el botón, cargar un video aleatorio
+            mostrarVideoAleatorio(data.videos);
             cargarVideoBtn.addEventListener('click', () => {
                 mostrarVideoAleatorio(data.videos);
             });
