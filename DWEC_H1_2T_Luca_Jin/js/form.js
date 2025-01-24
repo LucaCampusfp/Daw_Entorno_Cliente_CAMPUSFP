@@ -19,7 +19,7 @@ document.getElementById('contactForm').addEventListener('submit', function (even
 
     // Validar que los campos obligatorios estén llenos
     if (!nombre || !apellidos || !email || !user || !pass || !confirmPass || !pais) {
-        showError('Todos los campos obligatorios deben ser completados.');
+        showError('Los campos obligatorios deben ser completados.');
         isValid = false;
     }
 
@@ -30,8 +30,8 @@ document.getElementById('contactForm').addEventListener('submit', function (even
     }
 
     // Validar la longitud y tipo de la contraseña
-    if (pass.length < 8 || !/[A-Za-z0-9]/.test(pass)) {
-        showError('La contraseña debe tener al menos 8 caracteres alfanuméricos.');
+    if (pass.length < 8 || !/[A-Za-z]/.test(pass) || !/[0-9]/.test(pass)) {
+        showError('La contraseña debe tener al menos 8 caracteres y contener al menos una letra y un número.');
         isValid = false;
     }
 
