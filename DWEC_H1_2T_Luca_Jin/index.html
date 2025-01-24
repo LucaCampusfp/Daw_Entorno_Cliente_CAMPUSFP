@@ -12,12 +12,13 @@
     <script src="js/carrousel.js" defer></script>
     <script src="js/form.js" defer></script>
     <link rel="stylesheet" href="css/carrousel.css">
+    <link rel="stylesheet" href="/css/horario.css">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="width:70%;">Mi Sitio</a>
+            <a class="navbar-brand" href="#" style="width:60%;">DoBu Martial Arts</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,8 +38,8 @@
                         <a class="nav-link" href="videos.html">Videos Destacados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="precios.html">Precios</a>
-                    </li>
+                      <a class="nav-link" href="precios.html">Precios</a>
+                  </li>
                 </ul>
             </div>
         </div>
@@ -57,15 +58,21 @@
             <div class="carousel-inner">
                 <div class="item active">
                     <img class="carrouselImg" src="./imgs/p1.jpg" alt="Los Angeles" style="width:100%; height: 50%;">
-                    1
+                    <p style="text-align: center; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-weight: bold; 
+                    color: aqua; margin-top: 5px;">1/3</p>
                 </div>
                 <div class="item">
                     <img class="carrouselImg" src="./imgs/p2.jpg" alt="Chicago" style="width:100%; height: 50%;">
-                    2
+                    <p style="text-align: center; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+                    font-weight: bold; color: aqua; margin-top: 5px;">2/3</p>
+                
+                    
                 </div>
                 <div class="item">
                     <img class="carrouselImg" src="./imgs/p3.jpg" alt="New york" style="width:100%; height: 50%;">
-                    3
+                    <p style="text-align: center; font-size: xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+                    font-weight: bold; color: aqua; margin-top: 5px;">3/3</p>
+                
                 </div>
             </div>
 
@@ -81,7 +88,7 @@
         </div>
 
         <!-- Botones para iniciar y detener el carrusel -->
-        <button id="start" onclick="startAutoPlay()">Iniciar Carrusel</button>
+        <button id="start" onclick="startAutoPlay()" style="background-color: aqua;">Iniciar Carrusel</button>
         <button id="fin" onclick="stopAutoPlay()" style="display:none;">Detener Carrusel</button>
     </div>
 

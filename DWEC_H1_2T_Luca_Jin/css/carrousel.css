@@ -50,3 +50,13 @@
         padding: 15px;
     }
 }
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url('/DWEC_H1_2T_Luca_Jin/imgs/icon.png'); /* Ruta de la imagen */
+    background-size: cover; /* Hace que la imagen cubra todo el fondo */
+    background-repeat: repeat;
+    background-attachment: fixed; /* Hace que la imagen de fondo no se mueva al hacer scroll */
+  }
+  
