@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<music>
+    <band>
+        <name>Coldplay</name>
+        <songs>
+            <items>
+                <title>Paradise</title>
+                <url>https://www.youtube.com/watch?v=1G4isv_Fylg</url>
+            </items>
+            <songs>
+            <items>
+                <title>Paradise</title>
+                <url>https://www.youtube.com/watch?v=1G4isv_Fylg</url>
+            </items>
+        </songs>
+        </songs>
+    </band>
+    <band>
+        <name>Depeche Mode</name>
+        <songs>
+            <items>
+                <title>Enjoy the silence</title>
+                <url>https://www.youtube.com/watch?v=aGSKrC7dGcY</url>
+            </items>
+        </songs>
+    </band>
+</music>
