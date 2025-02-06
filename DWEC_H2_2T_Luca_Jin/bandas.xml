@@ -22,5 +22,56 @@
             </items>
         </songs>
     </band>
-    
+    <band>
+        <name>Queen</name>
+        <songs>
+            <items>
+                <title>Bohemian Rhapsody</title>
+                <url>https://www.youtube.com/watch?v=fJ9rUzIMcZQ</url>
+            </items>
+            <items>
+                <title>Don't Stop Me Now</title>
+                <url>https://www.youtube.com/watch?v=HgzGwKwLmgM</url>
+            </items>
+        </songs>
+    </band>
+    <band>
+        <name>The Beatles</name>
+        <songs>
+            <items>
+                <title>Hey Jude</title>
+                <url>https://www.youtube.com/watch?v=A_MjCqQoLLA</url>
+            </items>
+            <items>
+                <title>Let It Be</title>
+                <url>https://www.youtube.com/watch?v=QDYfEBY9NM4</url>
+            </items>
+        </songs>
+    </band>
+    <band>
+        <name>Radiohead</name>
+        <songs>
+            <items>
+                <title>Karma Police</title>
+                <url>https://www.youtube.com/watch?v=IBH97ma9YiI</url>
+            </items>
+            <items>
+                <title>Creep</title>
+                <url>https://www.youtube.com/watch?v=XFkzRNyygfk</url>
+            </items>
+        </songs>
+    </band>
+    <band>
+        <name>U2</name>
+        <songs>
+            <items>
+                <title>With or Without You</title>
+                <url>https://www.youtube.com/watch?v=6DeDzsCGbsQ</url>
+            </items>
+            <items>
+                <title>Beautiful Day</title>
+                <url>https://www.youtube.com/watch?v=co6WMzDOh1o</url>
+            </items>
+        </songs>
+    </band>
 </music>
