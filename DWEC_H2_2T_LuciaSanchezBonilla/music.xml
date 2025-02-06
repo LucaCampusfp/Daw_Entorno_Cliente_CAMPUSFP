@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<music>
+    <band>
+        <name>Coldplay</name>
+        <songs>
+            <items>
+                <title>Paradise</title>
+                <url>https://www.youtube.com/watch?v=1G4isv_Fylg</url>
+            </items>
+            <items>
+                <title>Yellow</title>
+                <url>https://www.youtube.com/watch?v=yKNxeF4KMsY</url>
+            </items>
+            <items>
+                <title>Viva La Vida</title>
+                <url>https://www.youtube.com/watch?v=dvgZkm1xWPE</url>
+            </items>
+        </songs>
+    </band>
+    <band>
+        <name>Depeche Mode</name>
+        <songs>
+            <items>
+                <title>Enjoy the Silence</title>
+                <url>https://www.youtube.com/watch?v=aGSKrC7dGcY</url>
+            </items>
+            <items>
+                <title>Personal Jesus</title>
+                <url>https://www.youtube.com/watch?v=u1xrNaTO1bI</url>
+            </items>
+            <items>
+                <title>Policy of Truth</title>
+                <url>https://www.youtube.com/watch?v=Fy7FzXLin7o</url>
+            </items>
+        </songs>
+    </band>
+    <band>
+        <name>Radiohead</name>
+        <songs>
+            <items>
+                <title>Creep</title>
+                <url>https://www.youtube.com/watch?v=XFkzRNyygfk</url>
+            </items>
+            <items>
+                <title>Karma Police</title>
+                <url>https://www.youtube.com/watch?v=1uYWYWPc9HU</url>
+            </items>
+            <items>
+                <title>No Surprises</title>
+                <url>https://www.youtube.com/watch?v=u5CVsCnxyXg</url>
+            </items>
+        </songs>
+    </band>
+    <band>
+        <name>U2</name>
+        <songs>
+            <items>
+                <title>With or Without You</title>
+                <url>https://www.youtube.com/watch?v=ujNeHIo7oTE</url>
+            </items>
+            <items>
+                <title>Beautiful Day</title>
+                <url>https://www.youtube.com/watch?v=co6WMzDOh1o</url>
+            </items>
+            <items>
+                <title>One</title>
+                <url>https://www.youtube.com/watch?v=ftjEcrrf7r0</url>
+            </items>
+        </songs>
+    </band>
+    <band>
+        <name>The Beatles</name>
+        <songs>
+            <items>
+                <title>Hey Jude</title>
+                <url>https://www.youtube.com/watch?v=A_MjCqQoLLA</url>
+            </items>
+            <items>
+                <title>Let It Be</title>
+                <url>https://www.youtube.com/watch?v=QDYfEBY9NM4</url>
+            </items>
+            <items>
+                <title>Come Together</title>
+                <url>https://www.youtube.com/watch?v=45cYwDMibGo</url>
+            </items>
+        </songs>
+    </band>
+</music>

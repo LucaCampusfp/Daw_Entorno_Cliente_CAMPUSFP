@@ -1,0 +1,89 @@
+/* Estilos generales del cuerpo */
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);  /* Degradado oscuro elegante */
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo de la barra de navegación */
+.navbar {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);  /* Degradado vibrante */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-brand, .nav-link {
+    color: #ffffff !important;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-link:hover {
+    color: #ffcc70 !important;  /* Color dorado al pasar el cursor */
+}
+
+/* Título de las bandas */
+h2 {
+    color: #ff416c;  /* Color vibrante */
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.4);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Estilo de las tarjetas de canciones */
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #16222a, #3a6073);  /* Degradado azul oscuro */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: white;
+}
+
+.card:hover {
+    transform: scale(1.07);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo del encabezado de la tarjeta (nombre de la canción) */
+.card-header {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    text-align: center;
+    font-size: 1.4rem;
+    padding: 18px;
+    font-weight: bold;
+}
+
+/* Estilo del cuerpo de la tarjeta donde está el iframe */
+.card-body {
+    padding: 0;
+}
+
+iframe {
+    border-radius: 12px;
+    width: 100%;
+}
+
+/* Estilo del pie de página */
+footer {
+    background: linear-gradient(135deg, #16222a, #3a6073);
+    color: white;
+    padding: 30px;
+    text-align: center;
+    margin-top: auto;
+}
+
+footer img {
+    width: 100px;
+    margin-top: 15px;
+}
+
+/* Sombra y transición para el iframe */
+.card-body iframe {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
