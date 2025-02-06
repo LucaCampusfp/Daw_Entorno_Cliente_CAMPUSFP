@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Banda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #001f3f; /* Azul oscuro marino */
+            color: white;
+        }
+        .navbar {
+            background-color: #8b0000; /* Rojo oscuro */
+        }
+        .navbar a {
+            color: white !important;
+        }
+        .card {
+            background-color: #333; /* Gris oscuro */
+            color: white;
+            cursor: pointer;
+        }
+        .card:hover {
+            background-color: #555;
+        }
+        footer {
+            background-color: #8b0000; /* Rojo oscuro */
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bandName = urlParams.get('band');
+
+            if (bandName) {
+                document.getElementById("band-title").textContent = bandName;
+
+                fetch("bandas.xml")
+                    .then(response => response.text())
+                    .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+                    .then(xml => {
+                        let bands = xml.getElementsByTagName("band");
+                        let content = document.getElementById("content");
+
+                        for (let i = 0; i < bands.length; i++) {
+                            let name = bands[i].getElementsByTagName("name")[0].textContent;
+
+                            if (name === bandName) {
+                                let songsContainer = bands[i].getElementsByTagName("songs")[0];
+                                let songs = songsContainer.getElementsByTagName("items");
+
+                                for (let j = 0; j < songs.length; j++) {
+                                    let title = songs[j].getElementsByTagName("title")[0].textContent;
+                                    let url = songs[j].getElementsByTagName("url")[0].textContent;
+
+                                    let songItem = document.createElement("div");
+                                    songItem.classList.add("card", "my-3");
+                                    songItem.innerHTML = `
+                                        <div class="card-body">
+                                            <h5 class="card-title">${title}</h5>
+                                            <iframe width="100%" height="315" src="${url.replace("watch?v=", "embed/")}" frameborder="0" allowfullscreen></iframe>
+                                        </div>`;
+
+                                    content.appendChild(songItem);
+                                }
+                            }
+                        }
+                    })
+                    .catch(error => console.error('Error loading XML:', error));
+            } else {
+                console.error('No band name provided in URL');
+            }
+        });
+    </script>
+</head>
+<body class="container mt-4">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Bandas Musicales</a>
+        </div>
+    </nav>
+    
+    <h2 id="band-title" class="mt-4"></h2>
+    <div id="content"></div>
+
+    <footer class="mt-5 text-center p-3">
+        <p>Curso: Desarrollo Web | Alumno: [Tu Nombre] | Centro: [Tu Centro]</p>
+        <img src="logo_campusfp.png" alt="CampusFP" width="100">
+    </footer>
+</body>
+</html>

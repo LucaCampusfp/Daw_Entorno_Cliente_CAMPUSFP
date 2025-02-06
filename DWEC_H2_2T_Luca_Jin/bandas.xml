@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <music>
     <band>
-        <name>Coldplay</name>
+        <name>Coldplay</name>    
         <songs>
             <items>
                 <title>Paradise</title>
                 <url>https://www.youtube.com/watch?v=1G4isv_Fylg</url>
             </items>
-            <songs>
-            <items>
-                <title>Paradise</title>
-                <url>https://www.youtube.com/watch?v=1G4isv_Fylg</url>
+             <items>
+                <title>WE PRAY</title>
+                <url>https://www.youtube.com/watch?v=cFI1wZoG6tE</url>
             </items>
-        </songs>
         </songs>
     </band>
     <band>
@@ -24,4 +22,5 @@
             </items>
         </songs>
     </band>
+    
 </music>

@@ -1,79 +1,50 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Cargamos el archivo XML
-    fetch('data.xml')
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("bandas.xml")
         .then(response => response.text())
-        .then(xmlData => {
-            // Parseamos el XML
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlData, 'text/xml');
-
-            // Obtenemos todos los elementos <band>
-            const bands = xmlDoc.getElementsByTagName('band');
-
-            // Referencias a los elementos del DOM
-            const navList = document.getElementById('nav-list');
-            const content = document.getElementById('content');
-
-            // Función para extraer el ID del video de la URL
-            function getVideoId(url) {
-                const regExp = /(?:https?:\/\/(?:www\.)?youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-                const match = url.match(regExp);
-                return match ? match[1] : null;
-            }
-
-            // Iteramos sobre cada banda
-            Array.from(bands).forEach((band, index) => {
-                const bandName = band.getElementsByTagName('name')[0].textContent;
-                const songs = band.getElementsByTagName('songs')[0].getElementsByTagName('items');
-
-                // Creamos el enlace de navegación
-                const navItem = document.createElement('li');
-                navItem.classList.add('nav-item');
-                const navLink = document.createElement('a');
-                navLink.classList.add('nav-link');
-                navLink.href = `#band${index}`;
-                navLink.textContent = bandName;
-                navItem.appendChild(navLink);
-                navList.appendChild(navItem);
-
-                // Creamos la sección para la banda
-                const section = document.createElement('section');
-                section.id = `band${index}`;
-                section.classList.add('my-4');
-                const sectionTitle = document.createElement('h2');
-                sectionTitle.textContent = bandName;
-                section.appendChild(sectionTitle);
-
-                // Iteramos sobre las canciones
-                Array.from(songs).forEach(songItem => {
-                    const title = songItem.getElementsByTagName('title')[0].textContent;
-                    const url = songItem.getElementsByTagName('url')[0].textContent;
-                    const videoId = getVideoId(url);
-
-                    if (videoId) {
-                        // Creamos el título de la canción
-                        const songTitle = document.createElement('h3');
-                        songTitle.textContent = title;
-                        section.appendChild(songTitle);
-
-                        // Creamos el iframe para el video de YouTube
-                        const iframe = document.createElement('iframe');
-                        iframe.width = '560';
-                        iframe.height = '315';
-                        iframe.src = `https://www.youtube.com/embed/${videoId}`;
-                        iframe.frameBorder = '0';
-                        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-                        iframe.allowFullscreen = true;
-                        section.appendChild(iframe);
-                    } else {
-                        console.error(`No se pudo extraer el ID del video de la URL: ${url}`);
-                    }
+        .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+        .then(xml => {
+            let bands = xml.getElementsByTagName("band");
+            let menu = document.getElementById("menu");
+            let content = document.getElementById("content");
+            
+            for (let i = 0; i < bands.length; i++) {
+                let bandName = bands[i].getElementsByTagName("name")[0].textContent;
+                let menuItem = document.createElement("div");
+                menuItem.classList.add("nav-link", "band-item");
+                menuItem.textContent = bandName;
+                menuItem.style.cursor = "pointer"; 
+                menuItem.addEventListener("click", function () {
+                    window.location.href = `detalles.html?band=${encodeURIComponent(bandName)}`;
                 });
-
+                let songList = document.createElement("div");
+                songList.classList.add("band-songs");
+                let songs = bands[i].getElementsByTagName("items");
+                
+                for (let j = 0; j < songs.length; j++) {
+                    let title = songs[j].getElementsByTagName("title")[0].textContent;
+                    songList.innerHTML += `<p>${title}</p>`;
+                }
+                menuItem.appendChild(songList);
+                menu.appendChild(menuItem);
+                
+                let section = document.createElement("div");
+                section.classList.add("mt-4");
+                section.id = "band- " + i;
+                section.innerHTML = `<h2>${bandName}</h2>`;
+                
+                for (let j = 0; j < songs.length; j++) {
+                    let title = songs[j].getElementsByTagName("title")[0].textContent;
+                    let url = songs[j].getElementsByTagName("url")[0].textContent;
+                    section.innerHTML += `
+                        <div class="card my-3">
+                            <div class="card-body">
+                                <h5 class="card-title">${title}</h5>
+                                <iframe width="100%" height="315" src="${url.replace("watch?v=", "embed/")}" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>`;
+                }
                 content.appendChild(section);
-            });
-        })
-        .catch(error => {
-            console.error('Error al cargar el archivo XML:', error);
+            }
         });
 });
+
